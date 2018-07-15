@@ -34,6 +34,13 @@ public class generator {
         System.out.println("2. Cleric");
         System.out.println("3. Druid");
         System.out.println("4. Fighter");
+        System.out.println("5. Monk");
+        System.out.println("6. Paladin");
+        System.out.println("7. Ranger");
+        System.out.println("8. Rogue");
+        System.out.println("9. Sorcerer");
+        System.out.println("10. Warlock");
+        System.out.println("11. Wizard");
 
         // User selects the class they want to build
         System.out.print("Please type the number of the class you wish to pick:\t");

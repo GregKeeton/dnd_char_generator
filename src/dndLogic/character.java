@@ -19,19 +19,19 @@ import java.io.InputStreamReader;
  *  wizard    - 11
  */
 public class character {
-    String name;
-    String race;
-    boolean gender;
-    int specialization;
-    int speed;
+    private String name;
+    private String race;
+    private boolean gender;
+    private int specialization;
+    private int speed;
 
     // Ability scores
-    int strength;
-    int dexterity;
-    int constitution;
-    int intelligence;
-    int wisdom;
-    int charisma;
+    private int strength;
+    private int dexterity;
+    private int constitution;
+    private int intelligence;
+    private int wisdom;
+    private int charisma;
 
     public String getName() {
         return name;
@@ -77,7 +77,7 @@ public class character {
         return strength;
     }
 
-    public void setStrength(int strength) {
+    private void setStrength(int strength) {
         this.strength = strength;
     }
 
@@ -85,7 +85,7 @@ public class character {
         return dexterity;
     }
 
-    public void setDexterity(int dexterity) {
+    private void setDexterity(int dexterity) {
         this.dexterity = dexterity;
     }
 
@@ -93,7 +93,7 @@ public class character {
         return constitution;
     }
 
-    public void setConstitution(int constitution) {
+    private void setConstitution(int constitution) {
         this.constitution = constitution;
     }
 
@@ -101,7 +101,7 @@ public class character {
         return intelligence;
     }
 
-    public void setIntelligence(int intelligence) {
+    private void setIntelligence(int intelligence) {
         this.intelligence = intelligence;
     }
 
@@ -109,7 +109,7 @@ public class character {
         return wisdom;
     }
 
-    public void setWisdom(int wisdom) {
+    private void setWisdom(int wisdom) {
         this.wisdom = wisdom;
     }
 
@@ -117,12 +117,21 @@ public class character {
         return charisma;
     }
 
-    public void setCharisma(int charisma) {
+    private  void setCharisma(int charisma) {
         this.charisma = charisma;
     }
 
     public void allocateScores(int scores[]) throws IOException {
         if(scores.length == 6) {
+            BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+            int choice;
+
+            while(this.specialization < 0 || this.specialization > 11) {
+                System.out.println("\nInvalid choice entered.  Please enter a number from 0 - 11:\t");
+                this.setSpecialization(Integer.parseInt(reader.readLine()));
+            }
+
+            // Barbarian
             if(this.specialization == 0) {
                 this.setIntelligence(scores[0]);
                 this.setCharisma(scores[1]);
@@ -131,6 +140,7 @@ public class character {
                 this.setConstitution(scores[4]);
                 this.setStrength(scores[5]);
             }
+            // Bard
             else if(this.specialization == 1) {
                 this.setIntelligence(scores[0]);
                 this.setWisdom(scores[1]);
@@ -139,9 +149,16 @@ public class character {
                 this.setDexterity(scores[4]);
                 this.setCharisma(scores[5]);
             }
-            //else if(this.specialization == 2) {
-
-            //}
+            // Cleric
+            else if(this.specialization == 2) {
+                this.setDexterity(scores[0]);
+                this.setCharisma(scores[1]);
+                this.setIntelligence(scores[2]);
+                this.setStrength(scores[3]);
+                this.setConstitution(scores[4]);
+                this.setWisdom(scores[5]);
+            }
+            // Druid
             else if(this.specialization == 3) {
                 this.setStrength(scores[0]);
                 this.setCharisma(scores[1]);
@@ -150,9 +167,8 @@ public class character {
                 this.setDexterity(scores[4]);
                 this.setWisdom(scores[5]);
             }
+            // Fighter
             else if(this.specialization == 4) {
-                BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-                int choice;
                 System.out.print("Would you prefer Dexterity (0) or Strength (1) as your main ability score?\t");
                 choice = Integer.parseInt(reader.readLine());
 
@@ -172,7 +188,69 @@ public class character {
                     this.setConstitution(scores[4]);
                     this.setDexterity(scores[5]);
                 }
-
+            }
+            // Monk
+            else if(this.specialization == 5) {
+                this.setCharisma(scores[0]);
+                this.setIntelligence(scores[1]);
+                this.setStrength(scores[2]);
+                this.setConstitution(scores[3]);
+                this.setWisdom(scores[4]);
+                this.setDexterity(scores[5]);
+            }
+            // Paladin
+            else if(this.specialization == 6) {
+                this.setDexterity(scores[0]);
+                this.setIntelligence(scores[1]);
+                this.setWisdom(scores[2]);
+                this.setConstitution(scores[3]);
+                this.setCharisma(scores[4]);
+                this.setStrength(scores[5]);
+            }
+            // Ranger
+            else if(this.specialization == 7) {
+                this.setCharisma(scores[0]);
+                this.setStrength(scores[1]);
+                this.setIntelligence(scores[2]);
+                this.setWisdom(scores[3]);
+                this.setConstitution(scores[4]);
+                this.setDexterity(scores[5]);
+            }
+            // Rogue
+            else if(this.specialization == 8) {
+                this.setStrength(scores[0]);
+                this.setIntelligence(scores[1]);
+                this.setConstitution(scores[2]);
+                this.setWisdom(scores[3]);
+                this.setCharisma(scores[4]);
+                this.setDexterity(scores[5]);
+            }
+            // Sorcerer
+            else if(this.specialization == 9) {
+                this.setStrength(scores[0]);
+                this.setWisdom(scores[1]);
+                this.setIntelligence(scores[2]);
+                this.setConstitution(scores[3]);
+                this.setDexterity(scores[4]);
+                this.setCharisma(scores[5]);
+            }
+            // Warlock
+            else if(this.specialization == 10) {
+                this.setStrength(scores[0]);
+                this.setWisdom(scores[1]);
+                this.setIntelligence(scores[2]);
+                this.setDexterity(scores[3]);
+                this.setConstitution(scores[4]);
+                this.setCharisma(scores[5]);
+            }
+            // Wizard
+            else if(this.specialization == 11) {
+                this.setStrength(scores[0]);
+                this.setCharisma(scores[1]);
+                this.setWisdom(scores[2]);
+                this.setDexterity(scores[3]);
+                this.setConstitution(scores[4]);
+                this.setIntelligence(scores[5]);
             }
         }
     }
