@@ -33,6 +33,11 @@ public class character {
     private int wisdom;
     private int charisma;
 
+    // Races
+    private String[] races = {"Dragonborn", "Dwarf", "Elf",
+                              "Gnome", "Half Elf", "Half Orc",
+                              "Halfling", "Human", "Tiefling"};
+
     public String getName() {
         return name;
     }
@@ -45,8 +50,8 @@ public class character {
         return race;
     }
 
-    public void setRace(String race) {
-        this.race = race;
+    public void setRace(int race) {
+        this.race = races[race];
     }
 
     public boolean isGender() {
