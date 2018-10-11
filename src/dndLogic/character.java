@@ -34,11 +34,14 @@ public class character {
     public static final String ABIL_INC_TIEFLING = ", you may pick one extra" +
             " ability score to increase by +2\n0. Charisma\n1. Dexterity\n";
 
+    private int level;
+    private int proficiency;
     private String name;
     private String race;
     private String gender;
     private int specialization;
     private int speed;
+    private int hitpoints;
 
     // Ability scores
     private int strength;
@@ -50,14 +53,14 @@ public class character {
 
     // Specializations
     private String[] specs = {"Barbarian", "Bard", "Cleric",
-                              "Druid", "Fighter", "Monk",
-                              "Paladin", "Ranger", "Rogue",
-                              "Sorcerer", "Warlock", "Wizard"};
+            "Druid", "Fighter", "Monk",
+            "Paladin", "Ranger", "Rogue",
+            "Sorcerer", "Warlock", "Wizard"};
 
     // Races
     private String[] races = {"Dragonborn", "Dwarf", "Elf",
-                              "Gnome", "Half Elf", "Half Orc",
-                              "Halfling", "Human", "Tiefling"};
+            "Gnome", "Half Elf", "Half Orc",
+            "Halfling", "Human", "Tiefling"};
 
     public String toString() {
         return "Your character is " + this.getName() + ", a " +
@@ -70,11 +73,33 @@ public class character {
 
     public String displayAbilityScores() {
         return "\n\nStrength:\t" + this.getStrength() +
-        "\nDexterity:\t" + this.getDexterity() +
-        "\nConstitution:\t" + this.getConstitution() +
-        "\nIntelligence:\t" + this.getIntelligence() +
-        "\nWisdom:\t" + this.getWisdom() +
-        "\nCharisma:\t" + this. getCharisma();
+                "\nDexterity:\t" + this.getDexterity() +
+                "\nConstitution:\t" + this.getConstitution() +
+                "\nIntelligence:\t" + this.getIntelligence() +
+                "\nWisdom:\t" + this.getWisdom() +
+                "\nCharisma:\t" + this. getCharisma();
+    }
+
+    // Constructor method
+    public character(int level) {
+
+        // Validation checking for correct level given
+        if(level < 1 || level > 20) {
+            System.out.println("Your character must be between level 1 or level 20");
+            System.exit(1);
+        }
+
+        // Set player proficiency based on given level
+        if(level >= 1 && level <= 4)
+            this.proficiency = 2;
+        else if(level >= 5 && level <= 8)
+            this.proficiency = 3;
+        else if(level >= 9 && level <= 12)
+            this.proficiency = 4;
+        else if(level >= 13 && level <= 16)
+            this.proficiency = 5;
+        else
+            this.proficiency = 6;
     }
 
     public String getName() {
@@ -118,6 +143,19 @@ public class character {
 
     public void setSpeed(int speed) {
         this.speed = speed;
+    }
+
+    public int getHitpoints() {
+        return this.hitpoints;
+    }
+
+    public void setHitpoints(int hp) {
+        this.hitpoints = hp;
+    }
+
+    // IMPLEMENT THIS
+    public int calculateHitpoints() {
+        return 0;
     }
 
     public int getStrength() {
@@ -325,11 +363,15 @@ public class character {
         if(this.race.equals(this.races[0])) {
             this.strength += 2;
             this.charisma++;
+            // Set speed
+            this.setSpeed(30);
         }
         // Dwarf
         else if(this.race.equals(this.races[1])) {
             // All dwarves get +2 to constitution by default
             this.constitution += 2;
+            // Set speed
+            this.setSpeed(25);
 
             // Prompt user to pick subrace
             System.out.println(SUBRACE);
@@ -356,6 +398,8 @@ public class character {
         else if(this.race.equals(this.races[2])) {
             // All elves get +2 to dexterity by default
             this.dexterity += 2;
+            // Set speed
+            this.setSpeed(30);
 
             // Prompt user to pick subrace
             System.out.println(SUBRACE);
@@ -469,7 +513,7 @@ public class character {
             // Lightfoot gets charisma +1
             if(choice == 0)
                 this.charisma++;
-            // Sout gets constitution +1
+                // Sout gets constitution +1
             else if(choice == 1)
                 this.constitution++;
         }
